@@ -15,6 +15,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import co.edu.uniquindio.pokeexplorer.domain.model.PokemonDetail
+import co.edu.uniquindio.pokeexplorer.ui.components.ConnectionBanner
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -22,12 +23,15 @@ fun PokemonDetailScreen(onBack: () -> Unit, viewModel: PokemonDetailViewModel = 
     val state by viewModel.uiState.collectAsStateWithLifecycle()
 
     Scaffold(topBar = {
-        TopAppBar(
-            title = { Text(state.pokemon?.name?.replaceFirstChar { it.uppercase() } ?: "Detalle") },
-            navigationIcon = {
-                IconButton(onClick = onBack) { Icon(Icons.AutoMirrored.Filled.ArrowBack, "Volver") }
-            }
-        )
+        Column {
+            TopAppBar(
+                title = { Text(state.pokemon?.name?.replaceFirstChar { it.uppercase() } ?: "Detalle") },
+                navigationIcon = {
+                    IconButton(onClick = onBack) { Icon(Icons.AutoMirrored.Filled.ArrowBack, "Volver") }
+                }
+            )
+            ConnectionBanner(state.isOnline)
+        }
     }) { padding ->
         Box(Modifier.padding(padding).fillMaxSize()) {
             val pokemon = state.pokemon

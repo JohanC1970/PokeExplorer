@@ -14,13 +14,13 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import co.edu.uniquindio.pokeexplorer.domain.model.PokemonSummary
+import co.edu.uniquindio.pokeexplorer.ui.components.ConnectionBanner
 import kotlinx.coroutines.flow.distinctUntilChanged
 
 @Composable
@@ -105,20 +105,7 @@ fun PokemonListScreen(
     }
 }
 
-@Composable
-private fun ConnectionBanner(isOnline: Boolean) {
-    Surface(
-        color = if (isOnline) Color(0xFF1F7A4D) else MaterialTheme.colorScheme.error,
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        Text(
-            text = if (isOnline) "● En línea" else "● Sin conexión (offline)",
-            color = Color.White,
-            style = MaterialTheme.typography.labelMedium,
-            modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp)
-        )
-    }
-}
+
 
 @Composable
 private fun PokemonRow(pokemon: PokemonSummary, onClick: () -> Unit) {
