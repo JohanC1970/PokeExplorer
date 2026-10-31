@@ -37,7 +37,7 @@ class ConnectivityObserver @Inject constructor(@ApplicationContext context: Cont
 
 fun Throwable.toUserMessage(): String = when {
 
-    this is HttpException && code() == 404 -> "No se encontró ningún Pokémon con ese nombre"
+    this is HttpException && code() == 404 -> "No se encontró el Pokémon"
     this is IOException -> "Sin conexión o servidor inaccesible. Inténtalo de nuevo"
     else -> "Ocurrió un error inesperado"
 

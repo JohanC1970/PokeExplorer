@@ -45,7 +45,7 @@ fun PokemonListScreen(
         OutlinedTextField(
             value = state.query,
             onValueChange = viewModel::onQueryChange,
-            placeholder = { Text("Buscar por nombre (ej. pikachu)") },
+            placeholder = { Text("Buscar por nombre (ej. pi)") },
             leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) },
             singleLine = true,
             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
@@ -80,6 +80,11 @@ fun PokemonListScreen(
                     Spacer(Modifier.height(12.dp))
                     Button(onClick = viewModel::retry) { Text("Reintentar") }
                 }
+                state.items.isEmpty() && state.endReached -> Text(
+                    "No hay Pokémon que empiecen por \"${state.query}\"",
+                    modifier = Modifier.align(Alignment.Center).padding(32.dp),
+                    style = MaterialTheme.typography.bodyLarge
+                )
                 else -> LazyColumn(
                     state = listState,
                     contentPadding = PaddingValues(16.dp),

@@ -16,6 +16,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
+
 private const val PAGE_SIZE = 20
 
 data class PokemonListUiState(
@@ -94,7 +95,7 @@ class PokemonListViewModel @Inject constructor(
             }
             val type = s.selectedType
             val result = when {
-                s.query.isNotBlank() -> repository.searchByName(s.query).map { PokemonPage(listOf(it), true) }
+                s.query.isNotBlank() -> repository.searchByName(s.query, offset, PAGE_SIZE)
                 type != null -> repository.getByType(type, offset, PAGE_SIZE)
                 else -> repository.getPage(offset, PAGE_SIZE)
             }

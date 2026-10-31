@@ -7,7 +7,7 @@ import co.edu.uniquindio.pokeexplorer.domain.model.PokemonSummary
 interface PokemonRepository {
 
     suspend fun getPage(offset: Int, limit: Int): Result<PokemonPage>
-    suspend fun searchByName(name: String): Result<PokemonSummary>
+    suspend fun searchByName(prefix: String, offset: Int, limit: Int): Result<PokemonPage>
     suspend fun getTypes(): Result<List<String>>
     suspend fun getByType(type: String, offset: Int, limit: Int): Result<PokemonPage>
     suspend fun getDetail(id: Int): Result<PokemonDetail>
