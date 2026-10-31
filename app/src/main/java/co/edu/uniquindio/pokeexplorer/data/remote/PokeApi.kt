@@ -44,7 +44,8 @@ interface PokeApi {
     val weight: Int,   // hectogramos
     val types: List<TypeSlotDto>,
     val stats: List<StatDto>,
-    val abilities: List<AbilitySlotDto>
+    val abilities: List<AbilitySlotDto>,
+    val species: NamedResourceDto   // especie real; las formas (id >= 10000) apuntan a la de su Pokémon base
 )
 
 @Serializable data class TypeSlotDto(val slot: Int, val type: NamedResourceDto)
