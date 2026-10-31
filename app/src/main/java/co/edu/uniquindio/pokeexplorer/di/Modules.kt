@@ -3,6 +3,7 @@ package co.edu.uniquindio.pokeexplorer.di
 import co.edu.uniquindio.pokeexplorer.data.remote.PokeApi
 import co.edu.uniquindio.pokeexplorer.data.repository.PokemonRepositoryImpl
 import co.edu.uniquindio.pokeexplorer.domain.repository.PokemonRepository
+import co.edu.uniquindio.pokeexplorer.BuildConfig
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -16,6 +17,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.kotlinx.serialization.asConverterFactory
 
+
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
@@ -24,7 +26,12 @@ object NetworkModule {
 
     @Provides @Singleton
     fun provideOkHttp(): OkHttpClient = OkHttpClient.Builder()
-        .addInterceptor(HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BASIC })
+        .apply {
+            // Solo en debug: en la versión publicada no se escriben peticiones en Logcat.
+            if (BuildConfig.DEBUG) {
+                addInterceptor(HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BASIC })
+            }
+        }
         .build()
 
     @Provides @Singleton
