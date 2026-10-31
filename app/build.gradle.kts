@@ -63,10 +63,8 @@ dependencies {
 
     // Networking & Serialization
     implementation(libs.kotlinx.serialization.json)
-    implementation(libs.ktor.client.core)
-    implementation(libs.ktor.client.okhttp)
-    implementation(libs.ktor.client.content.negotiation)
-    implementation(libs.ktor.serialization.kotlinx.json)
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.kotlinx.serialization)
     implementation(libs.okhttp)
     implementation(libs.okhttp.logging)
 
